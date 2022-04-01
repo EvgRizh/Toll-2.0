@@ -21,7 +21,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class GPSSimService {
     private GPSPoint point = new GPSPoint(56.2,48.3,36.155,45);
 
-    public GPSPoint getGPS(GPSPoint point) throws InterruptedException {
+    public GPSPoint getGPS() throws InterruptedException {
         while (true) {
             Thread.sleep(1000);
             point.gpsRandom();

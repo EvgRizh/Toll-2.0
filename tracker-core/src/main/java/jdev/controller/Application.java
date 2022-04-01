@@ -9,6 +9,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Duration;
+
+import static java.time.Duration.ofMillis;
+
 /**
  * Created by jenia on 17.03.22.
  */
@@ -26,6 +30,9 @@ public class Application {
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
+        return builder
+                .setConnectTimeout(2000)
+                .setReadTimeout(2000)
+                .build();
     }
 }

@@ -8,7 +8,7 @@
     </appender>
     <appender name="FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/server-core/src/main/resources/logbackgpstrue.log</file>
+        <file>logbackgpstrue.log</file>
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logbackgpstrue.%d{yyyy-MM-dd}.log</fileNamePattern>
