@@ -17,16 +17,17 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 public class GetGPS {
     private static final Logger log = LoggerFactory.getLogger(GetGPS.class);
 
+    public String readGPS(){
+        RestTemplate restTemplate = new RestTemplate();
+        String response = restTemplate.getForObject("http://localhost:8080/getgps", String.class);
+        log.info(response);
+        return  response;
+    }
+
     public static void main(String... args) throws IOException, InterruptedException {
         while (true) {
-//            RestTemplate restTemplate = new RestTemplate();
-//            GPSPoint response = restTemplate.getForObject("http://localhost:8080/getgps", GPSPoint.class);
-            String response = IOUtils.toString(new URL("http://localhost:8080/getgps"), "UTF8");
-            log.info(response);
-//            System.out.println(response);
-//            if (response.split(",").length == 4) log.info("{success:\"true\"}");
-//            else log.info("{success:\"false\"}");
-//            Thread.sleep(1000);
+            GetGPS getGPS = new GetGPS();
+            getGPS.readGPS();
         }
     }
 }

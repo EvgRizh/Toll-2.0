@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+
+
 /**
  * Created by jenia on 17.03.22.
  */
@@ -14,10 +16,11 @@ import org.springframework.web.client.RestTemplate;
 public class GPSController {
 
     @Autowired
-    GPSSimService gpsSimService;
+    RestTemplate restTemplate;
 
     @Autowired
-    RestTemplate restTemplate;
+    GPSSimService gpsSimService;
+
 
     @RequestMapping(value = "/gps", method = RequestMethod.POST)
     public String setGPS(@RequestBody GPSPoint pt) {
@@ -27,7 +30,7 @@ public class GPSController {
 
     @RequestMapping("/getgps")
     public  String getGPS() throws InterruptedException, JsonProcessingException {
-        String response = restTemplate.postForObject("http://localhost:8080/gps", gpsSimService.getGPS(), String.class);
-        return response;
+            String response = restTemplate.postForObject("http://localhost:8080/gps", gpsSimService.getGPS(), String.class);
+            return response;
     }
 }
