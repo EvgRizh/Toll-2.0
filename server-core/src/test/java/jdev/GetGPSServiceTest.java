@@ -1,5 +1,6 @@
 package jdev;
 
+import jdev.service.GetGPSService;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;
 
@@ -8,14 +9,14 @@ import static org.junit.Assert.*;
 /**
  * Created by jenia on 21.04.22.
  */
-public class GetGPSTest {
+public class GetGPSServiceTest {
 
     @Test
     public void readGPS() throws Exception {
-        GetGPS getGPS = new GetGPS();
-        String response = getGPS.readGPS();
+        GetGPSService getGPSService = new GetGPSService();
+        GPSPointEntity response = getGPSService.readGPS();
         System.out.println(response);
-        assertTrue(response.contains("{success:\"true\"}"));
+        assertNotNull(response);
     }
 
 }

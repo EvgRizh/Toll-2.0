@@ -3,23 +3,39 @@ package jdev;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- * Created by jenia on 01.03.22.
- */
-public class GPSPoint {
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.AUTO;
+
+@Entity
+@Table(name = "COORDSNAME1")
+public class GPSPointEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    int id;
+
+    @Column(name = "LAT")
     private double lat;
+
+    @Column(name = "LON")
     private double lon;
+
+    @Column(name = "AZIMUTH")
     private double azimuth;
+
+    @Column(name = "SPEED")
     private double speed;
 
-    public GPSPoint(double lat, double lon, double azimuth, double speed) {
+    public GPSPointEntity(double lat, double lon, double azimuth, double speed) {
         this.lat = lat;
         this.lon = lon;
         this.azimuth = azimuth;
         this.speed = speed;
     }
 
-    public GPSPoint() {
+    public GPSPointEntity() {
     }
 
 
@@ -61,7 +77,7 @@ public class GPSPoint {
         return mapper.writeValueAsString(this);
     }
 
-    public void gpsRandom() {
+    public GPSPointEntity gpsRandom() {
         double rnd = Math.random();
         double pointLat = getLat() + rnd/100;
         double pointLon = getLon() - rnd/100;
@@ -72,6 +88,7 @@ public class GPSPoint {
         setAzimuth(Math.ceil(pointAzimuth*1000)/1000);
         setSpeed(Math.ceil(pointSpeed*1000)/1000);
 
+        return null;
     }
 
 

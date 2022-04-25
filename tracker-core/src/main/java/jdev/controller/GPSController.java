@@ -1,8 +1,8 @@
 package jdev.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import jdev.GPSPoint;
 import jdev.Service.GPSSimService;
+import jdev.GPSPointEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -21,16 +21,18 @@ public class GPSController {
     @Autowired
     GPSSimService gpsSimService;
 
+    @Autowired
+    GPSPointEntity gpsPointEntity;
+
 
     @RequestMapping(value = "/gps", method = RequestMethod.POST)
-    public String setGPS(@RequestBody GPSPoint pt) {
-        if (pt == null) return "{success:\"false\"}";
-        else return "{success:\"true\"}";
+    public GPSPointEntity setGPS(@RequestBody GPSPointEntity pt) {
+        return pt;
     }
 
     @RequestMapping("/getgps")
-    public  String getGPS() throws InterruptedException, JsonProcessingException {
-            String response = restTemplate.postForObject("http://localhost:8080/gps", gpsSimService.getGPS(), String.class);
+    public  GPSPointEntity getGPS() throws InterruptedException, JsonProcessingException {
+            GPSPointEntity response = restTemplate.postForObject("http://localhost:8080/gps", gpsSimService.getGPS(), GPSPointEntity.class);
             return response;
     }
 }
